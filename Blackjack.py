@@ -5,7 +5,6 @@ import random
 # Get info
 User = input("Insira o seu username? ")
 Money_inicial = input("Bem vindo " + User + "!!! \nQual o valor que pretendes apostar? ")
-print(User + " " + Money_inicial + "$")
 
 # Variaveis
 gameover = False
@@ -16,8 +15,8 @@ deck = deck()
 y1 = 0
 y2 = 0
 cards = []
-score = [[0 for i in range(N_players)]]
-As = [[0 for i in range(N_players)]]
+score = [0 for i in range(N_players)]
+As = [0 for i in range(N_players)]
 for i in range(N_players):
     cards.append([])
 
@@ -27,9 +26,10 @@ while not gameover:
 
     #inicio da ronda
     round_counter += 1
-    print("Round " + str(round_counter) + ":")
-    round_bet = input(User + " quando queres apostar nesta ronda? ")
-    Money -= int(round_bet)
+    print("\n* Dealer - " + User + " o teu Saldo é " + Money_inicial + "$\n")
+    print("------------------------------------------------------\n                       Round " + str(round_counter) + ":\n------------------------------------------------------")
+    round_bet = int(input("* "+ User + " quando queres apostar nesta ronda? "))
+    Money -= round_bet
 
     #atribuiçao de cartas
     y = 0
@@ -55,9 +55,24 @@ while not gameover:
 
             cards[x][round_counter-1].append((y1,y2))
 
-    for a in range(N_players):
-        print(Score[a])
+    for x in range(N_players):
+        for y in range(2):
+            print()
 
+
+    for x in range(N_players-1):
+        if As[x] > 0:
+            for y in range(As[x]):
+                g = 0
+                while g != 11 and g != 1:
+                    g = int(input("* Dealer - " + User + " tens um As, o teu score atual é " + str(score[x]) + ", qual o valor que lhe pretendes atribuir? 1 ou 11?"))
+                score[x] += g
+        if score[x] == 21 and score[N_players-1] != 21:
+            print("* Dealer - " + User + " Blackjack!!! Parabéns!!! ganhaste " + str(2.5 * round_bet) + "$")
+            Money += 2.5 * round_bet
+        elif score[x] == 21 and score[N_players-1] == 21:
+            print("* Dealer - " + User + " Blackjack!!! Para ambos nós!!! recuperas assim a tua aposta de " + str(round_bet) + "$")
+            Money += round_bet
 
 
 

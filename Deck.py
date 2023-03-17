@@ -25,3 +25,27 @@ class deck:
             12: "Rei"    }
 
         return ( conversorcarta.get(y2) + " de "  + conversortipo.get(y1) );
+
+    def Card_emoji(self,y1,y2):
+        conversorTIPO =  {
+            0: "\U1F0D",
+            1: "\U1F0C",
+            2: "\U1F0B",
+            3: "\U1F0A" }
+
+        conversorCARTA = {
+            0: "1",
+            1: "2",
+            2: "3",
+            3: "4",
+            4: "5",
+            5: "6",
+            6: "7",
+            7: "8",
+            8: "9",
+            9: "A",
+            10: "B",
+            11: "D",
+            12: "E"    }
+
+        return ( conversorTIPO.get(y1) + conversorCARTA.get(y2) );
